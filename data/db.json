@@ -1,25 +1,25 @@
 {
   "projects": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Design UI Mockups",
       "details": "Create wireframes and design mockups for the project planner app.",
-      "complete": false
-    },
-    {
-      "id": 2,
-      "title": "Set Up Database",
-      "details": "Design and implement the database schema for storing project data.",
       "complete": true
     },
     {
-      "id": 3,
+      "id": "2",
+      "title": "Set Up Database",
+      "details": "Design and implement the database schema for storing project data.",
+      "complete": false
+    },
+    {
+      "id": "3",
       "title": "Develop API Endpoints",
       "details": "Build RESTful APIs for creating, updating, and fetching projects.",
       "complete": false
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "Implement Authentication",
       "details": "Add user login and authentication functionality.",
       "complete": true

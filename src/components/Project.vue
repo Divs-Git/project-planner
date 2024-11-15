@@ -1,11 +1,17 @@
 <template>
-  <div class="project">
-    <div class="actions" @click="toggleProjectDetails">
-      <h3>{{ project.title }}</h3>
+  <div class="project" :class="{ complete: this.project.complete }">
+    <div class="actions">
+      <h3 @click="toggleProjectDetails">{{ project.title }}</h3>
       <div class="icons">
         <span class="material-icons"> edit </span>
         <span class="material-icons" @click="deleteProject"> delete </span>
-        <span class="material-icons"> done </span>
+        <span
+          class="material-icons"
+          :class="{ tick: this.project.complete }"
+          @click="completeProject"
+        >
+          done
+        </span>
       </div>
     </div>
     <div class="details" v-if="showProjectDetails">
@@ -18,7 +24,7 @@
 export default {
   name: 'Project',
   props: ['project'],
-  emits: ['delete'],
+  emits: ['delete', 'complete'],
   data() {
     return {
       showProjectDetails: false,
@@ -34,6 +40,15 @@ export default {
         method: 'DELETE',
       })
         .then(() => this.$emit('delete', this.project.id))
+        .catch((error) => console.log(error))
+    },
+    completeProject() {
+      fetch(this.url, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ complete: !this.project.complete }),
+      })
+        .then(() => this.$emit('complete', this.project.id))
         .catch((error) => console.log(error))
     },
   },
@@ -75,5 +90,13 @@ h3 {
 
 .material-icons:hover {
   color: #777;
+}
+
+.complete {
+  border-left: 4px solid #00ce89;
+}
+
+.tick {
+  color: #00ce89;
 }
 </style>
