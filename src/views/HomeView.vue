@@ -2,15 +2,19 @@
   <main>
     <div v-if="projects.length">
       <div v-for="project in projects" :key="project.id">
-        {{ project.title }}
+        <Project :project="project" />
       </div>
     </div>
   </main>
 </template>
 
 <script>
+import Project from '../components/Project.vue'
 export default {
   name: 'HomeView',
+  components: {
+    Project,
+  },
   data() {
     return {
       projects: [],
