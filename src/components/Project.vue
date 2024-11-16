@@ -3,7 +3,9 @@
     <div class="actions">
       <h3 @click="toggleProjectDetails">{{ project.title }}</h3>
       <div class="icons">
-        <span class="material-icons"> edit </span>
+        <router-link :to="{ name: 'editProject', params: { id: project.id } }">
+          <span class="material-icons"> edit </span>
+        </router-link>
         <span class="material-icons" @click="deleteProject"> delete </span>
         <span
           class="material-icons"
@@ -21,6 +23,7 @@
 </template>
 
 <script>
+import { RouterLink } from 'vue-router'
 export default {
   name: 'Project',
   props: ['project'],

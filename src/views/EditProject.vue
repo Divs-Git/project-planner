@@ -4,30 +4,40 @@
     <input type="text" name="title" id="title" v-model="title" />
     <label for="details">Details</label>
     <textarea name="details" id="details" v-model="projectDetails"></textarea>
-    <button>Add Project</button>
+    <button>Update Project</button>
   </form>
 </template>
 
 <script>
 export default {
-  name: 'AddProject',
+  name: 'EditProject',
+  props: ['id'],
   data() {
     return {
       title: '',
       projectDetails: '',
+      url: 'http://localhost:8080/projects/' + this.id,
     }
+  },
+  mounted() {
+    fetch(this.url, {
+      method: 'GET',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        return (this.title = data.title), (this.projectDetails = data.details)
+      })
+      .catch((error) => console.log(error))
   },
   methods: {
     handleSubmit() {
-      let projectData = {
-        title: this.title,
-        details: this.projectDetails,
-        complete: false,
-      }
-
-      fetch('http://localhost:8080/projects', {
-        method: 'POST',
-        body: JSON.stringify(projectData),
+      fetch(this.url, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: this.title,
+          details: this.projectDetails,
+        }),
       })
         .then(() => this.$router.push('/'))
         .catch((error) => console.log(error))

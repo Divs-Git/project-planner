@@ -1,3 +1,4 @@
+import EditProject from '@/views/EditProject.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -12,6 +13,12 @@ const router = createRouter({
       path: '/add',
       name: 'addProject',
       component: () => import('../views/AddProject.vue'),
+    },
+    {
+      path: '/edit-project/:id',
+      name: 'editProject',
+      component: EditProject,
+      props: true,
     },
   ],
 })
