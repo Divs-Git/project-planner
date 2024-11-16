@@ -4,25 +4,13 @@
       "id": "3",
       "title": "Develop API ",
       "details": "Build RESTful APIs for creating, updating, and fetching projects.",
-      "complete": false
+      "complete": true
     },
     {
       "id": "4",
       "title": "Implement Authenticatio",
       "details": "Add user login and authentication function",
       "complete": true
-    },
-    {
-      "id": "e694",
-      "title": "sd",
-      "details": "sgs",
-      "complete": false
-    },
-    {
-      "id": "aa26",
-      "title": "fffa",
-      "details": "afafafaf",
-      "complete": false
     }
   ]
 }
