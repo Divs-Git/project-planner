@@ -1,7 +1,8 @@
 <template>
   <main>
-    <div v-if="projects.length">
-      <div v-for="project in projects" :key="project.id">
+    <Filter :current="current" @filter-project="current = $event" />
+    <div v-if="filteredProjects.length">
+      <div v-for="project in filteredProjects" :key="project.id">
         <Project :project="project" @delete="handleDelete" @complete="handleComplete" />
       </div>
     </div>
@@ -10,15 +11,29 @@
 
 <script>
 import Project from '../components/Project.vue'
+import Filter from '@/components/Filter.vue'
 export default {
   name: 'HomeView',
   components: {
     Project,
+    Filter,
   },
   data() {
     return {
       projects: [],
+      current: 'all',
     }
+  },
+  computed: {
+    filteredProjects() {
+      if (this.current === 'all') {
+        return this.projects
+      } else if (this.current === 'completed') {
+        return this.projects.filter((project) => project.complete === true)
+      } else if (this.current === 'inProgress') {
+        return this.projects.filter((project) => project.complete === false)
+      }
+    },
   },
   mounted() {
     fetch('http://localhost:8080/projects')
